@@ -1,0 +1,28 @@
+syntax = "proto3";
+package fs;
+
+enum NodeType {
+    DIR = 0;
+    FILE = 1;
+}
+
+message RefList {
+    repeated bytes parents = 1;
+}
+
+message NodeLink {
+    string name = 1;
+    bytes ref = 2;
+    NodeType type = 3;
+}
+
+message File {
+    RefList parents = 1;
+    string contentType = 2;
+    bytes content = 3;
+}
+
+message Directory {
+    RefList parents = 1;
+    map<string,NodeLink> children = 2;
+}
